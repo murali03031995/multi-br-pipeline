@@ -1,19 +1,19 @@
 pipeline {
 agent any 
 stages {
-    stage('CODE ANALYSIS-SONARQUBE') {
+    stage('WORKDIR') {
         steps {
-           sh 'echo sonar analysis completed'
+           sh 'pwd'
       }
     }
-    stage('BUILD FOR ARTIFACTS') {
+    stage('BUILD') {
         steps {
-           sh 'echo build completed'
+           sh 'docker build -t food .'
       }
     }
-    stage('BUILD IMAGES-DOCKER') {
+    stage('DEPLOY') {
         steps {
-           sh 'echo docker images build and pushed to docker hub'
+           sh 'docker container run -dt --name food-con -p 90:80 food'
       }
     }
   }
