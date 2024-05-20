@@ -1,19 +1,19 @@
 pipeline {
 agent any 
 stages {
-    stage('CODE ANALYSIS-SONARQUBE') {
+    stage('CONTAINERS') {
         steps {
-           sh 'echo sonar analysis completed'
+           sh 'docker container ls'
       }
     }
-    stage('BUILD FOR ARTIFACTS') {
+    stage('BUILD') {
         steps {
-           sh 'echo build completed'
+           sh 'docker build -t ecomm .'
       }
     }
-    stage('BUILD IMAGES-DOCKER') {
+    stage('DEPLOY') {
         steps {
-           sh 'echo docker images build and pushed to docker hub'
+           sh 'docker container run -dt --name ecomm-con -p 60:80 ecomm'
       }
     }
   }
